@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DashboardCandidatosController {
 
     @Autowired
-    private DashboardService dashboardService;
+    private DashboardService Service;
 
-    @GetMapping("/dashboard/candidatos")
-    public String dashboardCandidatos(Model model) {
-       // model.addAttribute("candidatosPorGenero", dashboardService.getCandidatosPorGenero());
-        //model.addAttribute("candidatosPorCidade", dashboardService.getCandidatosPorCidade());
-        //model.addAttribute("candidatosPorServico", dashboardService.getCandidatosPorServico());
-        //model.addAttribute("candidatosPorFaixaEtaria", dashboardService.getCandidatosPorFaixaEtaria());
-        return "dashboard-candidatos";
-    }
+    @GetMapping("candidato")
+    public String candidatoDashboard(Model model) {
+        //model.addAttribute("candidatosPorGenero", service.getCandidatosPorGenero());
+        //model.addAttribute("candidatosPorFaixaEtaria", service.getCandidatosPorFaixaEtaria());
+        //model.addAttribute("candidatosPorCidade", service.getCandidatosPorCidade());
+       // model.addAttribute("candidatosPorFormacao", service.getCandidatosPorFormacao());
+        return "candidato";
+}
+
 }

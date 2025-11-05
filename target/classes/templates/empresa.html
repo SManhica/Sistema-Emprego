@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Empresas</title>
+  <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <!-- MENU LATERAL -->
+    <nav class="sidebar">
+      <div class="logo"><h3>EMPREGO-MZ</h3></div>
+      <ul>
+        <li><a th:href="@{/candidato}">Candidatos</a></li>
+        <li><a th:href="@{/vagas}">Vagas</a></li>
+        <li class="active"><a th:href="@{/empresa}">Empresas</a></li>
+        <li><a th:href="@{/dashboard}">Estatísticas</a></li>
+      </ul>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content">
+      <header class="header"><h1>Estatísticas das Empresas</h1></header>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Empresas por Sector</h3>
+          <div id="chart-sector" class="chart-container"></div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Empresas por Cidade</h3>
+          <div id="chart-cidade" class="chart-container"></div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Vagas Publicadas por Empresa</h3>
+          <div id="chart-vagas" class="chart-container"></div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Tamanho das Empresas (nº Funcionários)</h3>
+          <div id="chart-tamanho" class="chart-container"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- GRÁFICOS HIGHCHARTS -->
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    const dadosSector = /*[[${empresasPorSector}]]*/ [];
+    const dadosCidade = /*[[${empresasPorCidade}]]*/ [];
+    const dadosVagas = /*[[${vagasPorEmpresa}]]*/ [];
+    const dadosTamanho = /*[[${empresasPorTamanho}]]*/ [];
+
+    function formatData(data) {
+      return data.map(item => [item.name, item.y]);
+    }
+
+    // Gráfico 1 - Empresas por Sector
+    Highcharts.chart('chart-sector', {
+      chart: { type: 'column' },
+      title: { text: null },
+      xAxis: { type: 'category' },
+      yAxis: { title: { text: 'Nº de Empresas' } },
+      series: [{ name: 'Empresas', data: formatData(dadosSector) }]
+    });
+
+    // Gráfico 2 - Empresas por Cidade
+    Highcharts.chart('chart-cidade', {
+      chart: { type: 'bar' },
+      title: { text: null },
+      xAxis: { categories: dadosCidade.map(d => d.name) },
+      yAxis: { title: { text: 'Nº de Empresas' } },
+      series: [{ name: 'Empresas', data: dadosCidade.map(d => d.y) }]
+    });
+
+    // Gráfico 3 - Vagas Publicadas por Empresa
+    Highcharts.chart('chart-vagas', {
+      chart: { type: 'line' },
+      title: { text: null },
+      xAxis: { categories: dadosVagas.map(d => d.name) },
+      yAxis: { title: { text: 'Vagas Publicadas' } },
+      series: [{ name: 'Vagas', data: dadosVagas.map(d => d.y) }]
+    });
+
+    // Gráfico 4 - Tamanho das Empresas
+    Highcharts.chart('chart-tamanho', {
+      chart: { type: 'pie' },
+      title: { text: null },
+      series: [{ name: 'Empresas', data: formatData(dadosTamanho) }]
+    });
+    /*]]>*/
+  </script>
+</body>
+</html>

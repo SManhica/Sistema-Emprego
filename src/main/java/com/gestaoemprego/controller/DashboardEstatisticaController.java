@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class DashboardController {
+public class DashboardEstatisticaController {
 
     @Autowired
     private DashboardService dashboardService;

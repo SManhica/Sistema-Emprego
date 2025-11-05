@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Candidatos</title>
+  <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <!-- MENU LATERAL -->
+    <nav class="sidebar">
+      <div class="logo"><h3>EMPREGO-MZ</h3></div>
+      <ul>
+        <li class="active"><a th:href="@{/candidato}">Candidatos</a></li>
+        <li><a th:href="@{/vagas}">Vagas</a></li>
+        <li><a th:href="@{/empresa}">Empresas</a></li>
+        <li><a th:href="@{/dashboard}">Estatísticas</a></li>
+      </ul>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content">
+      <header class="header"><h1>Estatísticas dos Candidatos</h1></header>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Candidatos por Género</h3>
+          <div id="chart-genero" class="chart-container"></div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Candidatos por Faixa Etária</h3>
+          <div id="chart-idade" class="chart-container"></div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Candidatos por Cidade</h3>
+          <div id="chart-cidade" class="chart-container"></div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Candidatos por Nível de Formação</h3>
+          <div id="chart-formacao" class="chart-container"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- GRÁFICOS HIGHCHARTS -->
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    const dadosGenero = /*[[${candidatosPorGenero}]]*/ [];
+    const dadosIdade = /*[[${candidatosPorFaixaEtaria}]]*/ [];
+    const dadosCidade = /*[[${candidatosPorCidade}]]*/ [];
+    const dadosFormacao = /*[[${candidatosPorFormacao}]]*/ [];
+
+    function formatData(data) {
+      return data.map(item => [item.name, item.y]);
+    }
+
+    // Gráfico 1 - Género
+    Highcharts.chart('chart-genero', {
+      chart: { type: 'pie' },
+      title: { text: null },
+      series: [{ name: 'Candidatos', data: formatData(dadosGenero) }]
+    });
+
+    // Gráfico 2 - Faixa Etária
+    Highcharts.chart('chart-idade', {
+      chart: { type: 'column' },
+      title: { text: null },
+      xAxis: { type: 'category' },
+      yAxis: { title: { text: 'Nº de Candidatos' } },
+      series: [{ name: 'Faixa Etária', data: formatData(dadosIdade) }]
+    });
+
+    // Gráfico 3 - Cidade
+    Highcharts.chart('chart-cidade', {
+      chart: { type: 'bar' },
+      title: { text: null },
+      xAxis: { categories: dadosCidade.map(d => d.name) },
+      yAxis: { title: { text: 'Nº de Candidatos' } },
+      series: [{ name: 'Candidatos', data: dadosCidade.map(d => d.y) }]
+    });
+
+    // Gráfico 4 - Formação
+    Highcharts.chart('chart-formacao', {
+      chart: { type: 'column' },
+      title: { text: null },
+      xAxis: { type: 'category' },
+      yAxis: { title: { text: 'Nº de Candidatos' } },
+      series: [{ name: 'Formação', data: formatData(dadosFormacao) }]
+    });
+    /*]]>*/
+  </script>
+</body>
+</html>
