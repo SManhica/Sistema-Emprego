@@ -26,8 +26,8 @@ public class CandidatoService {
     }
 
 
-    public List<Map<String, Object>> getCandidatosPorCidade() {
-        return candidatoRepository.findCandidatosPorCidade();
+    public List<Map<String, Object>> getCandidatosPorDistrito() {
+        return candidatoRepository.findCandidatosPorDistrito();
     }
 
 

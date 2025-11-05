@@ -35,7 +35,7 @@
           </div>
 
           <div class="chart-card">
-            <h3>Candidatos por Cidade</h3>
+            <h3>Candidatos por Distrito</h3>
             <div id="chart-cidade" class="chart-container"></div>
           </div>
 
@@ -52,7 +52,7 @@
       /*<![CDATA[*/
       const dadosGenero = /*[[${candidatosPorGenero}]]*/ [];
       const dadosIdade = /*[[${candidatosPorFaixaEtaria}]]*/ [];
-      const dadosCidade = /*[[${candidatosPorCidade}]]*/ [];
+      const dadosDistrito = /*[[${candidatosPorDistrito}]]*/ [];
       const dadosFormacao = /*[[${candidatosPorFormacao}]]*/ [];
 
       function formatData(data) {
@@ -89,14 +89,13 @@
 
       // Função auxiliar para gerar cores automáticas por categoria
       function getIdadeData(data) {
-  const cores = ["#2CAFFE", "#FE2371", "#FE6A35", "#544FC5", "#1C74BD"];
-  return data.map((item, index) => ({
-    name: item.name, // faixa etária
-    y: item.y,       // número de candidatos
-    color: cores[index % cores.length],
-  }));
-}
-
+        const cores = ["#2CAFFE", "#FE2371", "#FE6A35", "#544FC5", "#1C74BD"];
+        return data.map((item, index) => ({
+          name: item.name, // faixa etária
+          y: item.y, // número de candidatos
+          color: cores[index % cores.length],
+        }));
+      }
 
       // Gráfico 2 - Faixa Etária (Column com cores e labels)
       Highcharts.chart("chart-idade", {
@@ -133,22 +132,79 @@
         ],
       });
 
-      // Gráfico 3 - Cidade
+      // Gráfico 3 - Candidatos por Distrito (Bar Chart)
       Highcharts.chart("chart-cidade", {
         chart: { type: "bar" },
         title: { text: null },
-        xAxis: { categories: dadosCidade.map((d) => d.name) },
-        yAxis: { title: { text: "Nº de Candidatos" } },
-        series: [{ name: "Candidatos", data: dadosCidade.map((d) => d.y) }],
+        xAxis: {
+          categories: dadosDistrito.map((d) => d.name),
+          title: { text: "Distritos" },
+          labels: { style: { fontSize: "13px" } },
+        },
+        yAxis: {
+          title: { text: "Nº de Candidatos" },
+          allowDecimals: false,
+        },
+        tooltip: {
+          pointFormat:
+            '<span style="color:{point.color}">\u25CF</span> {point.name}: <b>{point.y}</b> candidatos',
+        },
+        plotOptions: {
+          bar: {
+            colorByPoint: true,
+            dataLabels: {
+              enabled: true,
+              format: "{point.y}",
+              style: { fontWeight: "bold" },
+            },
+          },
+        },
+        series: [
+          {
+            name: "Candidatos",
+            data: dadosDistrito.map((d) => d.y),
+          },
+        ],
       });
+
+      // Função para transformar dados do backend em formato [name, y]
+      function formatData(data) {
+        return data.map((item) => [item.name, item.y]);
+      }
 
       // Gráfico 4 - Formação
       Highcharts.chart("chart-formacao", {
         chart: { type: "column" },
         title: { text: null },
-        xAxis: { type: "category" },
+        xAxis: {
+          type: "category",
+          labels: {
+            rotation: -45,
+            style: {
+              fontSize: "13px",
+              fontFamily: "Verdana, sans-serif",
+            },
+          },
+        },
         yAxis: { title: { text: "Nº de Candidatos" } },
-        series: [{ name: "Formação", data: formatData(dadosFormacao) }],
+        legend: { enabled: false },
+        tooltip: { pointFormat: "{point.name}: <b>{point.y}</b>" },
+        series: [
+          {
+            name: "Formação",
+            colorByPoint: true,
+            data: formatData(dadosFormacao),
+            dataLabels: {
+              enabled: true,
+              rotation: -90,
+              color: "#FFFFFF",
+              inside: true,
+              verticalAlign: "top",
+              format: "{point.y}",
+              style: { fontSize: "13px", fontFamily: "Verdana, sans-serif" },
+            },
+          },
+        ],
       });
       /*]]>*/
     </script>

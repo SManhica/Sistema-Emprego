@@ -16,8 +16,8 @@ public class DashboardCandidatosController {
     public String candidatoDashboard(Model model) {
         model.addAttribute("candidatosPorGenero", service.getCandidatosPorGenero());
         model.addAttribute("candidatosPorFaixaEtaria", service.getCandidatosPorFaixaEtaria());
-        //model.addAttribute("candidatosPorCidade", service.getCandidatosPorCidade());
-       // model.addAttribute("candidatosPorFormacao", service.getCandidatosPorFormacao());
+        model.addAttribute("candidatosPorDistrito", service.getCandidatosPorDistrito());
+        model.addAttribute("candidatosPorFormacao", service.getCandidatosPorFormacao());
         return "candidato";
 }
 

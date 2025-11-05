@@ -67,14 +67,18 @@ public class CandidatoRepository {
                 .collect(Collectors.toList());
     }
 
-    // 3. Candidatos por cidade
-    public List<Map<String, Object>> findCandidatosPorCidade() {
+    // 3. Candidatos por distrito
+    public List<Map<String, Object>> findCandidatosPorDistrito() {
         Query query = em.createNativeQuery("""
-                    SELECT cidade AS name, COUNT(*) AS y
-                    FROM candidato
-                    GROUP BY cidade
-                    ORDER BY y DESC
-                """);
+                                    SELECT dist.nome AS name, COUNT(*) AS y
+                FROM candidato c
+                JOIN CandidatoEndereco ce ON c.id_candidato = ce.id_candidato
+                JOIN endereco e ON ce.id_endereco = e.id_endereco
+                JOIN distrito dist ON e.id_distrito = dist.id_distrito
+                GROUP BY dist.nome
+                ORDER BY y DESC
+
+                                """);
 
         List<Object[]> results = query.getResultList();
         if (results == null || results.isEmpty()) {
@@ -89,9 +93,10 @@ public class CandidatoRepository {
     // 4. Candidatos por nível de formação
     public List<Map<String, Object>> findCandidatosPorFormacao() {
         Query query = em.createNativeQuery("""
-                    SELECT nivel_formacao AS name, COUNT(*) AS y
-                    FROM candidato
-                    GROUP BY nivel_formacao
+                    SELECT fa.curso AS name, COUNT(*) AS y
+                    FROM formacaoacademica fa
+                    JOIN candidato c ON fa.id_candidato = c.id_candidato
+                    GROUP BY fa.curso
                     ORDER BY y DESC
                 """);
 
@@ -104,4 +109,5 @@ public class CandidatoRepository {
                 .map(r -> Map.of("name", r[0], "y", ((Number) r[1]).intValue()))
                 .collect(Collectors.toList());
     }
+
 }
