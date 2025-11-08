@@ -1,0 +1,10 @@
+com\gestaoemprego\service\DashboardService.class
+com\gestaoemprego\controller\DashboardVagaController.class
+com\gestaoemprego\controller\DashboardEstatisticaController.class
+com\gestaoemprego\controller\DashboardEmpresaController.class
+com\gestaoemprego\repository\DashboardRepository.class
+com\gestaoemprego\controller\LoginController.class
+com\gestaoemprego\repository\CandidatoRepository.class
+com\gestaoemprego\GestaoempregoApplication.class
+com\gestaoemprego\controller\DashboardCandidatosController.class
+com\gestaoemprego\service\CandidatoService.class

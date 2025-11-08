@@ -3,25 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - Sistema de Gestão de Emprego</title>
   <link rel="stylesheet" th:href="@{/css/login.css}" />
+  <title>Login - Gestão de Emprego</title>
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <h2>Login</h2>
-      <form th:action="@{/dashboard}" method="get">
-        <div class="input-group">
-          <label for="username">Usuário</label>
-          <input type="text" id="username" name="username" placeholder="Digite seu usuário" required />
-        </div>
-        <div class="input-group">
-          <label for="password">Senha</label>
-          <input type="password" id="password" name="password" placeholder="Digite sua senha" required />
-        </div>
-        <button >Entrar</button>
-      </form>
-    </div>
+  <div class="card">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <div class="input-group">
+        <label for="username">Usuário</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+      <div class="input-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <button type="submit">Entrar</button>
+    </form>
   </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Simula login (em produção, use Spring Security ou POST real)
+      alert('Login simulado! Redirecionando para o dashboard...');
+      window.location.href = '/dashboard';
+    });
+  </script>
 </body>
 </html>

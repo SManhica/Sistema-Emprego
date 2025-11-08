@@ -1,6 +1,10 @@
 C:\Users\Dailove\Documents\sistemaSGE\Sistema-Emprego\src\main\java\com\gestaoemprego\controller\DashboardCandidatosController.java
-C:\Users\Dailove\Documents\sistemaSGE\Sistema-Emprego\src\main\java\com\gestaoemprego\controller\DashboardController.java
+C:\Users\Dailove\Documents\sistemaSGE\Sistema-Emprego\src\main\java\com\gestaoemprego\controller\DashboardEmpresaController.java
+C:\Users\Dailove\Documents\sistemaSGE\Sistema-Emprego\src\main\java\com\gestaoemprego\controller\DashboardEstatisticaController.java
+C:\Users\Dailove\Documents\sistemaSGE\Sistema-Emprego\src\main\java\com\gestaoemprego\controller\DashboardVagaController.java
 C:\Users\Dailove\Documents\sistemaSGE\Sistema-Emprego\src\main\java\com\gestaoemprego\controller\LoginController.java
 C:\Users\Dailove\Documents\sistemaSGE\Sistema-Emprego\src\main\java\com\gestaoemprego\GestaoempregoApplication.java
+C:\Users\Dailove\Documents\sistemaSGE\Sistema-Emprego\src\main\java\com\gestaoemprego\repository\CandidatoRepository.java
 C:\Users\Dailove\Documents\sistemaSGE\Sistema-Emprego\src\main\java\com\gestaoemprego\repository\DashboardRepository.java
+C:\Users\Dailove\Documents\sistemaSGE\Sistema-Emprego\src\main\java\com\gestaoemprego\service\CandidatoService.java
 C:\Users\Dailove\Documents\sistemaSGE\Sistema-Emprego\src\main\java\com\gestaoemprego\service\DashboardService.java

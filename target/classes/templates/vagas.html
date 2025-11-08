@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Vagas</title>
+  <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <!-- MENU LATERAL -->
+    <nav class="sidebar">
+      <div class="logo"><h3>EMPREGO-MZ</h3></div>
+      <ul>
+        <li><a th:href="@{/candidato}">Candidatos</a></li>
+        <li class="active"><a th:href="@{/vagas}">Vagas</a></li>
+        <li><a th:href="@{/empresa}">Empresas</a></li>
+         <li><a th:href="@{/dashboard}">Estatísticas</a></li>
+      </ul>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content">
+      <header class="header"><h1>Estatísticas das Vagas</h1></header>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Vagas por Sector</h3>
+          <div id="chart-vagas-sector" class="chart-container"></div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Candidatos por Género</h3>
+          <div id="chart-genero" class="chart-container"></div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Publicação de Vagas (Últimos 6 Meses)</h3>
+          <div id="chart-vagas-tempo" class="chart-container"></div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Top 10 Cidades com Mais Candidatos</h3>
+          <div id="chart-cidades" class="chart-container"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- GRÁFICOS HIGHCHARTS -->
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    const dadosVagasSector = /*[[${vagasPorSector}]]*/ [];
+    const dadosGenero = /*[[${candidatosPorGenero}]]*/ [];
+    const dadosVagasTempo = /*[[${vagasPorMes}]]*/ [];
+    const dadosCidades = /*[[${topCidades}]]*/ [];
+
+    function formatData(data) {
+      return data.map(item => [item.name, item.y]);
+    }
+
+    Highcharts.chart('chart-vagas-sector', {
+      chart: { type: 'column' },
+      title: { text: null },
+      xAxis: { type: 'category' },
+      yAxis: { title: { text: 'Número de Vagas' } },
+      series: [{ name: 'Vagas', data: formatData(dadosVagasSector) }]
+    });
+
+    Highcharts.chart('chart-genero', {
+      chart: { type: 'pie' },
+      title: { text: null },
+      series: [{ name: 'Candidatos', data: formatData(dadosGenero) }]
+    });
+
+    Highcharts.chart('chart-vagas-tempo', {
+      chart: { type: 'line' },
+      title: { text: null },
+      xAxis: { categories: dadosVagasTempo.map(d => d.name) },
+      yAxis: { title: { text: 'Vagas Publicadas' } },
+      series: [{ name: 'Vagas', data: dadosVagasTempo.map(d => d.y) }]
+    });
+
+    Highcharts.chart('chart-cidades', {
+      chart: { type: 'bar' },
+      title: { text: null },
+      xAxis: { categories: dadosCidades.map(d => d.name) },
+      yAxis: { title: { text: 'Nº de Candidatos' } },
+      series: [{ name: 'Candidatos', data: dadosCidades.map(d => d.y) }]
+    });
+    /*]]>*/
+  </script>
+</body>
+</html>

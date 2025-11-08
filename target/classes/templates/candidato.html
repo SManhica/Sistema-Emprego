@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Candidatos</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+  <body>
+    <div class="layout">
+      <!-- MENU LATERAL -->
+      <nav class="sidebar">
+        <div class="logo"><h3>EMPREGO-MZ</h3></div>
+        <ul>
+          <li class="active"><a th:href="@{/candidato}">Candidatos</a></li>
+          <li><a th:href="@{/vagas}">Vagas</a></li>
+          <li><a th:href="@{/empresa}">Empresas</a></li>
+          <li><a th:href="@{/dashboard}">Estatísticas</a></li>
+        </ul>
+      </nav>
+
+      <!-- CONTEÚDO PRINCIPAL -->
+      <main class="main-content">
+        <header class="header"><h1>Estatísticas dos Candidatos</h1></header>
+        <div class="charts-grid">
+          <div class="chart-card">
+            <h3>Candidatos por Género</h3>
+            <div id="chart-genero" class="chart-container"></div>
+          </div>
+
+          <div class="chart-card">
+            <h3>Candidatos por Faixa Etária</h3>
+            <div id="chart-idade" class="chart-container"></div>
+          </div>
+
+          <div class="chart-card">
+            <h3>Candidatos por Distrito</h3>
+            <div id="chart-cidade" class="chart-container"></div>
+          </div>
+
+          <div class="chart-card">
+            <h3>Candidatos por Nível de Formação</h3>
+            <div id="chart-formacao" class="chart-container"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- GRÁFICOS HIGHCHARTS -->
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      const dadosGenero = /*[[${candidatosPorGenero}]]*/ [];
+      const dadosIdade = /*[[${candidatosPorFaixaEtaria}]]*/ [];
+      const dadosDistrito = /*[[${candidatosPorDistrito}]]*/ [];
+      const dadosFormacao = /*[[${candidatosPorFormacao}]]*/ [];
+
+      function formatData(data) {
+        return data.map((item) => [item.name, item.y]);
+      }
+
+      // Gráfico 1 - Género (Pie Chart aprimorado)
+      Highcharts.chart("chart-genero", {
+        chart: { type: "pie" },
+        title: { text: null },
+        tooltip: {
+          pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
+        },
+        accessibility: { point: { valueSuffix: "%" } },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: "pointer",
+            dataLabels: {
+              enabled: true,
+              format: "<b>{point.name}</b>: {point.percentage:.1f} %",
+              connectorColor: "silver",
+            },
+          },
+        },
+        series: [
+          {
+            name: "Candidatos",
+            colorByPoint: true,
+            data: formatData(dadosGenero),
+          },
+        ],
+      });
+
+      // Função auxiliar para gerar cores automáticas por categoria
+      function getIdadeData(data) {
+        const cores = ["#2CAFFE", "#FE2371", "#FE6A35", "#544FC5", "#1C74BD"];
+        return data.map((item, index) => ({
+          name: item.name, // faixa etária
+          y: item.y, // número de candidatos
+          color: cores[index % cores.length],
+        }));
+      }
+
+      // Gráfico 2 - Faixa Etária (Column com cores e labels)
+      Highcharts.chart("chart-idade", {
+        chart: { type: "column" },
+        title: { text: null },
+        xAxis: {
+          type: "category",
+          title: { text: "Faixa Etária" },
+          labels: { style: { fontSize: "13px" } },
+        },
+        yAxis: {
+          title: { text: "Nº de Candidatos" },
+          allowDecimals: false,
+        },
+        tooltip: {
+          pointFormat:
+            '<span style="color:{point.color}">\u25CF</span> {point.name}: <b>{point.y}</b> candidatos',
+        },
+        plotOptions: {
+          column: {
+            colorByPoint: true,
+            dataLabels: {
+              enabled: true,
+              format: "{point.y}",
+              style: { fontWeight: "bold" },
+            },
+          },
+        },
+        series: [
+          {
+            name: "Faixa Etária",
+            data: getIdadeData(dadosIdade),
+          },
+        ],
+      });
+
+      // Gráfico 3 - Candidatos por Distrito (Bar Chart)
+      Highcharts.chart("chart-cidade", {
+        chart: { type: "bar" },
+        title: { text: null },
+        xAxis: {
+          categories: dadosDistrito.map((d) => d.name),
+          title: { text: "Distritos" },
+          labels: { style: { fontSize: "13px" } },
+        },
+        yAxis: {
+          title: { text: "Nº de Candidatos" },
+          allowDecimals: false,
+        },
+        tooltip: {
+          pointFormat:
+            '<span style="color:{point.color}">\u25CF</span> {point.name}: <b>{point.y}</b> candidatos',
+        },
+        plotOptions: {
+          bar: {
+            colorByPoint: true,
+            dataLabels: {
+              enabled: true,
+              format: "{point.y}",
+              style: { fontWeight: "bold" },
+            },
+          },
+        },
+        series: [
+          {
+            name: "Candidatos",
+            data: dadosDistrito.map((d) => d.y),
+          },
+        ],
+      });
+
+      // Função para transformar dados do backend em formato [name, y]
+      function formatData(data) {
+        return data.map((item) => [item.name, item.y]);
+      }
+
+      // Gráfico 4 - Formação
+      Highcharts.chart("chart-formacao", {
+        chart: { type: "column" },
+        title: { text: null },
+        xAxis: {
+          type: "category",
+          labels: {
+            rotation: -45,
+            style: {
+              fontSize: "13px",
+              fontFamily: "Verdana, sans-serif",
+            },
+          },
+        },
+        yAxis: { title: { text: "Nº de Candidatos" } },
+        legend: { enabled: false },
+        tooltip: { pointFormat: "{point.name}: <b>{point.y}</b>" },
+        series: [
+          {
+            name: "Formação",
+            colorByPoint: true,
+            data: formatData(dadosFormacao),
+            dataLabels: {
+              enabled: true,
+              rotation: -90,
+              color: "#FFFFFF",
+              inside: true,
+              verticalAlign: "top",
+              format: "{point.y}",
+              style: { fontSize: "13px", fontFamily: "Verdana, sans-serif" },
+            },
+          },
+        ],
+      });
+      /*]]>*/
+    </script>
+  </body>
+</html>
