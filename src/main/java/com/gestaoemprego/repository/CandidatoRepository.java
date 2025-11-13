@@ -77,6 +77,7 @@ public class CandidatoRepository {
                 JOIN distrito dist ON e.id_distrito = dist.id_distrito
                 GROUP BY dist.nome
                 ORDER BY y DESC
+                limit 10
 
                                 """);
 
@@ -98,6 +99,7 @@ public class CandidatoRepository {
                     JOIN candidato c ON fa.id_candidato = c.id_candidato
                     GROUP BY fa.curso
                     ORDER BY y DESC
+                    limit 10
                 """);
 
         List<Object[]> results = query.getResultList();

@@ -25,9 +25,9 @@ public class DashboardService {
         return dashboardRepository.findVagasPorMesUltimos6Meses();
     }
 
-    //public List<Map<String, Object>> getTop10ServicosComCandidatos() {
-    //return dashboardRepository.findTop10ServicosComCandidatos();
-//}
+    public List<Map<String, Object>> getTop10ServicosComCandidatos() {
+    return dashboardRepository.findTop10ServicosComCandidatos();
+}
 
 
 

@@ -88,6 +88,32 @@ public class DashboardRepository {
                 .collect(Collectors.toList());
     }
 
+    // 4. Top 10 serviços com mais candidatos
+public List<Map<String, Object>> findTop10ServicosComCandidatos() {
+    Query query = em.createNativeQuery("""
+        SELECT 
+            s.nome_servico AS name, 
+            COUNT(c.id_candidato) AS y
+        FROM servico s
+        JOIN candidatoServico cs ON s.id_servico = cs.id_servico
+        JOIN candidato c ON cs.id_candidato = c.id_candidato
+        GROUP BY s.nome_servico
+        ORDER BY y DESC
+        LIMIT 10
+    """);
+
+    @SuppressWarnings("unchecked")
+    List<Object[]> results = query.getResultList();
+    if (results == null || results.isEmpty()) {
+        return List.of();
+    }
+
+    return results.stream()
+            .map(r -> Map.of("name", r[0], "y", ((Number) r[1]).intValue()))
+            .collect(Collectors.toList());
+}
+
+
 
 
 }

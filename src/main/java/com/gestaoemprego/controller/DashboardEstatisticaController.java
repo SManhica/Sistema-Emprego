@@ -20,7 +20,7 @@ public class DashboardEstatisticaController {
         model.addAttribute("vagasPorSector", dashboardService.getVagasPorSector());
         model.addAttribute("candidatosPorGenero", dashboardService.getCandidatosPorGenero());
         model.addAttribute("vagasPorMes", dashboardService.getVagasPorMesUltimos6Meses());
-        //model.addAttribute("topServicos", dashboardService.getTop10ServicosComCandidatos());
+        model.addAttribute("top10Servicos", dashboardService.getTop10ServicosComCandidatos());
         return "dashboard";
     }
 }
