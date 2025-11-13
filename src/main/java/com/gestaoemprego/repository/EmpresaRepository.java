@@ -20,7 +20,7 @@ public class EmpresaRepository {
         Query query = em.createNativeQuery("""
             SELECT dist.nome AS name, COUNT(DISTINCT e.id_empresa) AS y
             FROM empresa e
-            JOIN empresaendereco ee ON e.id_empresa = ee.id_empresa
+            JOIN EmpresaEndereco ee ON e.id_empresa = ee.id_empresa
             JOIN endereco endr ON ee.id_endereco = endr.id_endereco
             JOIN distrito dist ON endr.id_distrito = dist.id_distrito
             GROUP BY dist.nome
