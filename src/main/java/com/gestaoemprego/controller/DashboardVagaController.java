@@ -16,9 +16,9 @@ public class DashboardVagaController {
     public String vagaDashboard(Model model) {
         //Dados para os gráficos
        model.addAttribute("vagasPorSector", service.getVagasPorSector());
-       model.addAttribute("candidatosPorGenero", service.getCandidatosPorGenero());
+       model.addAttribute("vagasporEstado", service.getVagasporEstado());
        model.addAttribute("vagasPorMes", service.getVagasPorMes());
-       //model.addAttribute("topCidades", service.getTopCidadesComMaisCandidatos());
+       model.addAttribute("vagasByEstado", service.getVagasByEstado());
 
         return "vagas"; // nome do template Thymeleaf: vagas.html
     }

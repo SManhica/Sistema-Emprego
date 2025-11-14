@@ -40,12 +40,19 @@
       return data.map(item => [item.name, item.y]);
     }
 
+// cores personalizadas
+    Highcharts.setOptions({
+      colors: ['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066', '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee']
+    });
+
     Highcharts.chart('chart-vagas-sector', {
-      chart: { type: 'column' },
+      chart: { type: 'pie' },
       title: { text: null },
-      xAxis: { type: 'category' },
-      yAxis: { title: { text: 'Número de Vagas' } },
-      series: [{ name: 'Vagas', data: formatData(dadosVagasSector) }]
+      series: [{
+        name: 'Vagas',
+        colorByPoint: true,
+        data: formatData(dadosVagasSector)
+      }]
     });
 
     Highcharts.chart('chart-genero', {

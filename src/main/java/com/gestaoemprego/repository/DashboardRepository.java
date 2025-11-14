@@ -23,6 +23,7 @@ public class DashboardRepository {
             INNER JOIN vaga v ON e.id_empresa = v.id_empresa
             GROUP BY e.sector
             ORDER BY y DESC
+            LIMIT 10
         """);
 
         List<Object[]> results = query.getResultList();

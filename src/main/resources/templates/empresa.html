@@ -30,17 +30,17 @@
         </div>
 
         <div class="chart-card">
-          <h3>Empresas por Cidade</h3>
-          <div id="chart-cidade" class="chart-container"></div>
+          <h3>Empresas por Distrito</h3>
+          <div id="chart-Distrito" class="chart-container"></div>
         </div>
 
         <div class="chart-card">
-          <h3>Vagas Publicadas por Empresa</h3>
+          <h3>Vagas Publicadas por Empresa(tabela)</h3>
           <div id="chart-vagas" class="chart-container"></div>
         </div>
 
         <div class="chart-card">
-          <h3>Tamanho das Empresas (nº Funcionários)</h3>
+          <h3>Tamanho das Empresas(tabela)</h3>
           <div id="chart-tamanho" class="chart-container"></div>
         </div>
       </div>
@@ -50,39 +50,44 @@
   <!-- GRÁFICOS HIGHCHARTS -->
   <script th:inline="javascript">
     /*<![CDATA[*/
-    const dadosSector = /*[[${empresasPorSector}]]*/ [];
-    const dadosCidade = /*[[${empresasPorCidade}]]*/ [];
-    const dadosVagas = /*[[${vagasPorEmpresa}]]*/ [];
+    const dadosSector = /*[[${empresasPorRamo}]]*/ [];
+    const dadosDistrito = /*[[${empresasPorDistrito}]]*/ [];
+    const dadosVagas = /*[[${empresasPorNumeroDeVagas}]]*/ [];
     const dadosTamanho = /*[[${empresasPorTamanho}]]*/ [];
 
     function formatData(data) {
       return data.map(item => [item.name, item.y]);
     }
 
+// cores personalizadas
+    Highcharts.setOptions({
+      colors: ['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066', '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee']
+    });
+
     // Gráfico 1 - Empresas por Sector
     Highcharts.chart('chart-sector', {
       chart: { type: 'column' },
       title: { text: null },
-      xAxis: { type: 'category' },
+      xAxis: { categories: dadosSector.map(d => d.name) },
       yAxis: { title: { text: 'Nº de Empresas' } },
-      series: [{ name: 'Empresas', data: formatData(dadosSector) }]
+      series: [{ name: 'Empresas', data: dadosSector.map(d => d.y) }]
     });
 
     // Gráfico 2 - Empresas por Cidade
-    Highcharts.chart('chart-cidade', {
+    Highcharts.chart('chart-Distrito', {
       chart: { type: 'bar' },
       title: { text: null },
-      xAxis: { categories: dadosCidade.map(d => d.name) },
+      xAxis: { categories: dadosDistrito.map(d => d.name) },
       yAxis: { title: { text: 'Nº de Empresas' } },
-      series: [{ name: 'Empresas', data: dadosCidade.map(d => d.y) }]
+      series: [{ name: 'Empresas', data: dadosDistrito.map(d => d.y) }]
     });
 
     // Gráfico 3 - Vagas Publicadas por Empresa
     Highcharts.chart('chart-vagas', {
-      chart: { type: 'line' },
+      chart: { type: 'column' },
       title: { text: null },
       xAxis: { categories: dadosVagas.map(d => d.name) },
-      yAxis: { title: { text: 'Vagas Publicadas' } },
+      yAxis: { title: { text: 'Nº de Vagas' } },
       series: [{ name: 'Vagas', data: dadosVagas.map(d => d.y) }]
     });
 
@@ -90,7 +95,11 @@
     Highcharts.chart('chart-tamanho', {
       chart: { type: 'pie' },
       title: { text: null },
-      series: [{ name: 'Empresas', data: formatData(dadosTamanho) }]
+      series: [{
+        name: 'Empresas',
+        colorByPoint: true,
+        data: formatData(dadosTamanho)
+      }]
     });
     /*]]>*/
   </script>

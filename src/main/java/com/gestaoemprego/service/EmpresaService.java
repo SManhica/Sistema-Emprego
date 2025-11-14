@@ -16,8 +16,8 @@ public class EmpresaService {
     }
 
     // Empresas por Cidade
-    public List<Map<String, Object>> getEmpresasPorCidade() {
-        return empresaRepository.findEmpresasPorCidade();
+    public List<Map<String, Object>> getEmpresasPorDistrito() {
+        return empresaRepository.findEmpresasPorDistrito();
     }
 
     // Empresas por Ramo

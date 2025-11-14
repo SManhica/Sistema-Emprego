@@ -25,13 +25,13 @@ public class VagaService {
         return vagaRepository.findVagasPorMesUltimos6Meses();
     }
 
-    //  Top distritos  com mais candidatos
-    public List<Map<String, Object>> getTopCidadesComMaisCandidatos() {
-        return vagaRepository.findTopCidadesComMaisCandidatos();
+    //  vagas por Estado
+    public List<Map<String, Object>> getVagasByEstado() {
+        return vagaRepository.findVagasByEstado();
     }
-    // Candidatos por Gênero
-  public List<Map<String, Object>> getCandidatosPorGenero() {
-        return vagaRepository.findCandidatosPorGenero();
+    // vagas por Estado tabela
+  public List<Map<String, Object>> getVagasporEstado() {
+        return vagaRepository.findVagasPorEstado();
     }
 
 }

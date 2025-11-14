@@ -30,8 +30,8 @@
         </div>
 
         <div class="chart-card">
-          <h3>Candidatos por Género</h3>
-          <div id="chart-genero" class="chart-container"></div>
+          <h3>Vagas por Estado </h3>
+          <div id="chart-vagas-estado-tabela" class="chart-container"></div>
         </div>
 
         <div class="chart-card">
@@ -40,8 +40,8 @@
         </div>
 
         <div class="chart-card">
-          <h3>Top 10 Cidades com Mais Candidatos</h3>
-          <div id="chart-cidades" class="chart-container"></div>
+          <h3>Vagas por Estado</h3>
+          <div id="chart-vagas-estado" class="chart-container"></div>
         </div>
       </div>
     </main>
@@ -51,9 +51,9 @@
   <script th:inline="javascript">
     /*<![CDATA[*/
     const dadosVagasSector = /*[[${vagasPorSector}]]*/ [];
-    const dadosGenero = /*[[${candidatosPorGenero}]]*/ [];
+    const vagasporEstado = /*[[${vagasporEstado}]]*/ [];
     const dadosVagasTempo = /*[[${vagasPorMes}]]*/ [];
-    const dadosCidades = /*[[${topCidades}]]*/ [];
+    const vagaporEstado = /*[[${vagasByEstado}]]*/ [];
 
     function formatData(data) {
       return data.map(item => [item.name, item.y]);
@@ -67,12 +67,20 @@
       series: [{ name: 'Vagas', data: formatData(dadosVagasSector) }]
     });
 
-    Highcharts.chart('chart-genero', {
-      chart: { type: 'pie' },
-      title: { text: null },
-      series: [{ name: 'Candidatos', data: formatData(dadosGenero) }]
-    });
+    
+// dados em tabela 
+    Highcharts.chart('chart-vagas-estado-tabela', {
+    chart: { type: 'column' }, // precisa ser column ou bar
+    title: { text: null },
+    xAxis: { type: 'category' },
+    yAxis: { title: { text: 'Número de Vagas' } },
+    series: [{ name: 'Vagas', data: formatData(vagasporEstado) }],
+    exporting: {
+        showTable: true  // isso vai gerar a tabela automaticamente
+    }
+});
 
+  
     Highcharts.chart('chart-vagas-tempo', {
       chart: { type: 'line' },
       title: { text: null },
@@ -81,12 +89,24 @@
       series: [{ name: 'Vagas', data: dadosVagasTempo.map(d => d.y) }]
     });
 
-    Highcharts.chart('chart-cidades', {
-      chart: { type: 'bar' },
+    // mudar de cores para cada tipo de estado
+    const colorsEstado = {
+      'Ativas': '#28a745',
+      'Fechadas': '#dc3545',
+      'Pendente': '#ffc107'
+    };
+    Highcharts.chart('chart-vagas-estado', {
+      chart: { type: 'pie' },
       title: { text: null },
-      xAxis: { categories: dadosCidades.map(d => d.name) },
-      yAxis: { title: { text: 'Nº de Candidatos' } },
-      series: [{ name: 'Candidatos', data: dadosCidades.map(d => d.y) }]
+      plotOptions: {
+        pie: {
+          colors: Object.keys(colorsEstado).map(key => colorsEstado[key])
+        }
+      },
+      series: [{
+        name: 'Vagas',
+        data: formatData(vagaporEstado)
+      }]
     });
     /*]]>*/
   </script>

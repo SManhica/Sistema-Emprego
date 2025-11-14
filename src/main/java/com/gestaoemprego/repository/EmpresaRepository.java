@@ -16,7 +16,7 @@ public class EmpresaRepository {
     private EntityManager em;
 
     // Empresas por Cidade (usando Endereco -> Distrito -> Provincia)
-    public List<Map<String, Object>> findEmpresasPorCidade() {
+    public List<Map<String, Object>> findEmpresasPorDistrito() {
         Query query = em.createNativeQuery("""
             SELECT dist.nome AS name, COUNT(DISTINCT e.id_empresa) AS y
             FROM empresa e
@@ -25,6 +25,7 @@ public class EmpresaRepository {
             JOIN distrito dist ON endr.id_distrito = dist.id_distrito
             GROUP BY dist.nome
             ORDER BY y DESC
+            limit 10
         """);
 
         List<Object[]> results = query.getResultList();
@@ -42,6 +43,7 @@ public class EmpresaRepository {
             FROM empresa
             GROUP BY sector
             ORDER BY y DESC
+            limit 10
         """);
 
         List<Object[]> results = query.getResultList();

@@ -15,7 +15,7 @@ public class DashboardEmpresaController {
     @GetMapping("/empresa")
     public String empresaDashboard(Model model) {
         // Dados de exemplo (podes ajustar conforme o que o DashboardService devolve)
-        model.addAttribute("empresasPorCidade", service.getEmpresasPorCidade());
+        model.addAttribute("empresasPorDistrito", service.getEmpresasPorDistrito());
         model.addAttribute("empresasPorRamo", service.getEmpresasPorRamo());
         model.addAttribute("empresasPorTamanho", service.getEmpresasPorTamanho());
         model.addAttribute("empresasPorVagas", service.getEmpresasPorNumeroDeVagas());
