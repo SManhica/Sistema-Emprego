@@ -128,7 +128,7 @@ mvn spring-boot:run
 ```
 
 A aplicação ficará disponível em:
-👉 **[http://localhost:8080](http://localhost:8080)**
+👉 **[http://localhost:8080](http://localhost:8081)**
 
 ---
 
