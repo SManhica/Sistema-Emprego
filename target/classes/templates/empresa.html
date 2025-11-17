@@ -26,21 +26,51 @@
           <h3>Empresas por Sector</h3>
           <div id="chart-sector" class="chart-container"></div>
         </div>
+
         <div class="chart-card">
           <h3>Empresas por Distrito</h3>
           <div id="chart-Distrito" class="chart-container"></div>
         </div>
+
+        <!-- TABELA: Vagas Publicadas por Empresa -->
         <div class="chart-card">
-          <h3>Vagas Publicadas por Empresa(tabela)</h3>
-          <div id="chart-vagas" class="chart-container"></div>
+          <h3>Vagas Publicadas por Empresa</h3>
+          <div class="table-container">
+            <table id="table-vagas">
+              <thead>
+                <tr>
+                  <th>Empresa</th>
+                  <th>Nº de Vagas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="2" style="text-align: center; color: #666;">Carregando...</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
+
+        <!-- TABELA: Tamanho das Empresas -->
         <div class="chart-card">
-          <h3>Tamanho das Empresas(tabela)</h3>
-          <div id="chart-tamanho" class="chart-container"></div>
+          <h3>Tamanho das Empresas</h3>
+          <div class="table-container">
+            <table id="table-tamanho">
+              <thead>
+                <tr>
+                  <th>Tamanho</th>
+                  <th>Nº de Empresas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="2" style="text-align: center; color: #666;">Carregando...</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </main>
   </div>
+
   <script src="/js/empresa.js"></script>
 </body>
 </html>
