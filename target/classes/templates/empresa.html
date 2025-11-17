@@ -1,0 +1,46 @@
+<!-- src/main/resources/templates/empresa.html -->
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Empresas</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <nav class="sidebar">
+      <div class="logo"><h3>EMPREGO-MZ</h3></div>
+      <ul>
+        <li><a href="/candidato">Candidatos</a></li>
+        <li><a href="/vagas">Vagas</a></li>
+        <li class="active"><a href="/empresa">Empresas</a></li>
+        <li><a href="/dashboard">Estatísticas</a></li>
+      </ul>
+    </nav>
+    <main class="main-content">
+      <header class="header"><h1>Estatísticas das Empresas</h1></header>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Empresas por Sector</h3>
+          <div id="chart-sector" class="chart-container"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Empresas por Distrito</h3>
+          <div id="chart-Distrito" class="chart-container"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Vagas Publicadas por Empresa(tabela)</h3>
+          <div id="chart-vagas" class="chart-container"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Tamanho das Empresas(tabela)</h3>
+          <div id="chart-tamanho" class="chart-container"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="/js/empresa.js"></script>
+</body>
+</html>

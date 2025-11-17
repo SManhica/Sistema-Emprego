@@ -1,0 +1,46 @@
+<!-- src/main/resources/templates/vagas.html -->
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Vagas</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <nav class="sidebar">
+      <div class="logo"><h3>EMPREGO-MZ</h3></div>
+      <ul>
+        <li><a href="/candidato">Candidatos</a></li>
+        <li class="active"><a href="/vagas">Vagas</a></li>
+        <li><a href="/empresa">Empresas</a></li>
+         <li><a href="/dashboard">Estatísticas</a></li>
+      </ul>
+    </nav>
+    <main class="main-content">
+      <header class="header"><h1>Estatísticas das Vagas</h1></header>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Vagas por Sector</h3>
+          <div id="chart-vagas-sector" class="chart-container"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Vagas por Estado (Tabela)</h3>
+          <div id="chart-vagas-estado-tabela" class="chart-container"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Publicação de Vagas (Últimos 6 Meses)</h3>
+          <div id="chart-vagas-tempo" class="chart-container"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Vagas por Estado</h3>
+          <div id="chart-vagas-estado" class="chart-container"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="/js/vagas.js"></script>
+</body>
+</html>

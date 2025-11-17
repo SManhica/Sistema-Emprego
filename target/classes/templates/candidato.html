@@ -1,0 +1,46 @@
+<!-- src/main/resources/templates/candidato.html -->
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Candidatos</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <nav class="sidebar">
+      <div class="logo"><h3>EMPREGO-MZ</h3></div>
+      <ul>
+        <li class="active"><a href="/candidato">Candidatos</a></li>
+        <li><a href="/vagas">Vagas</a></li>
+        <li><a href="/empresa">Empresas</a></li>
+        <li><a href="/dashboard">Estatísticas</a></li>
+      </ul>
+    </nav>
+    <main class="main-content">
+      <header class="header"><h1>Estatísticas dos Candidatos</h1></header>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Candidatos por Género</h3>
+          <div id="chart-genero" class="chart-container"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Candidatos por Faixa Etária</h3>
+          <div id="chart-idade" class="chart-container"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Candidatos por Distrito</h3>
+          <div id="chart-cidade" class="chart-container"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Candidatos por Nível de Formação</h3>
+          <div id="chart-formacao" class="chart-container"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="/js/candidato.js"></script>
+</body>
+</html>
