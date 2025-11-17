@@ -1,212 +1,229 @@
-🧑‍💼 Sistema de Gestão de Emprego – Aplicação Web Java Spring Boot
+🧑‍💼 Sistema de Gestão de Emprego
 
-License: MIT (ou outra que escolher)
-Technologies: Java • Spring Boot • HTML • CSS • JavaScript • PostgreSQL
+Aplicação Web Java Spring Boot
 
-📘 Description
+License: MIT
+Tecnologias: Java • Spring Boot • HTML • CSS • JavaScript • PostgreSQL
 
-The Employment Management System is a web platform developed in Java 25 with Spring Boot, designed to manage job vacancies, candidates, applications, and company accounts.
-It provides a complete environment where companies can publish vacancies, candidates can apply, and administrators can monitor system activity.
+📘 Descrição
 
-The project follows the MVC pattern, uses JPA for persistence, Spring Security for authentication, and employs dynamic data structures to ensure scalability and performance.
+O Sistema de Gestão de Emprego é uma aplicação web desenvolvida em Java 25 com Spring Boot, criada para facilitar a interação entre candidatos, empresas e administradores em um ambiente unificado.
+
+A plataforma permite que empresas publiquem vagas, candidatos se inscrevam e que administradores controlem toda a atividade do sistema, garantindo segurança, escalabilidade e performance.
+
+O sistema segue rigorosamente o padrão MVC, utiliza JPA/Hibernate para persistência de dados, Spring Security para autenticação e autorização, além de estruturas dinâmicas para garantir flexibilidade e extensões futuras.
 
 📑 Table of Contents
 
-📘 Description
+📘 Descrição
 
-✨ Features
+✨ Funcionalidades
+
+💻 Tecnologias Utilizadas
+
+🛠️ Instalação
+
+🚀 Uso do Sistema
+
+👨‍💻 Como Funciona
+
+🗂️ Estrutura do Projeto
+
+🔑 Autenticação e Segurança
+
+🤝 Contribuição
+
+📄 Licença
+
+🔗 Links Importantes
+
+📝 Rodapé
+
+✨ Funcionalidades
+👤 Candidato
+
+Criar conta e fazer login
+
+Atualizar perfil (habilidades, contatos, CV upload)
+
+Pesquisar e filtrar vagas
+
+Enviar candidatura
+
+Consultar o estado das aplicações
+
+🏢 Empresa
+
+Registrar e fazer login como empresa
+
+Criar, editar e remover vagas
+
+Acompanhar candidatos inscritos
+
+Filtrar candidatos por:
+
+Habilidades
+
+Experiência
+
+Formação
+
+Dashboard de métricas de vagas publicadas
+
+🛡️ Administrador
+
+Gerenciar usuários (empresas e candidatos)
+
+Visualizar métricas gerais do sistema
+
+Acessar logs e auditorias
+
+Exportar relatórios de atividades
+
+Monitorar candidaturas
+
+⚙️ Funcionalidades Gerais
+
+Arquitetura MVC
+
+CRUD completo para todas as entidades
+
+Banco de dados PostgreSQL
+
+Sistema de login com Spring Security
+
+Layout responsivo
+
+Tema Claro/Escuro
+
+Internacionalização (pt / en)
+
+Logger e auditoria automática
 
 💻 Tech Stack
+Categoria	Tecnologias
+Linguagem	Java 25
+Framework Backend	Spring Boot 3.5.x
+Segurança	Spring Security + PasswordEncoder
+Front-End	HTML • CSS • JavaScript • Thymeleaf
+Banco de Dados	PostgreSQL
+Ferramentas	Maven, DevTools, Lombok, AOP
+🛠️ Instalação
+✔️ Pré-Requisitos
 
-🛠️ Installation
-
-🚀 Usage
-
-👨‍💻 How to Use
-
-🗂️ Project Structure
-
-🔑 Authentication and Security
-
-🤝 Contributing
-
-📄 License
-
-🔗 Important Links
-
-📝 Footer
-
-✨ Features
-👤 Candidate Features
-
-Create an account and login
-
-Edit profile (skills, CV upload, contacts)
-
-Search and filter job vacancies
-
-Apply for vacancies
-
-View application status
-
-🏢 Company Features
-
-Company registration and login
-
-Publish, edit, and remove job vacancies
-
-View list of candidates
-
-Filter applicants by skills, experience, and education
-
-Dashboard with job statistics
-
-🛡️ Admin Features
-
-Manage all users (companies & candidates)
-
-System metrics dashboard
-
-Logs/auditing of important actions
-
-View activity reports
-
-⚙️ General Features
-
-MVC architecture
-
-PostgreSQL database
-
-CRUD operations for core entities
-
-Spring Security with PasswordEncoder
-
-Responsive frontend
-
-Light/Dark mode
-
-Internationalization (pt/en)
-
-💻 Tech Stack
-
-Language: Java 25
-
-Framework: Spring Boot 3.5.x
-
-Template Engine: Thymeleaf
-
-Database: PostgreSQL
-
-Build Tool: Maven
-
-Security: Spring Security
-
-Frontend: HTML, CSS, JS
-
-Other: Lombok, Validation, AOP, DevTools
-
-🛠️ Installation
-Prerequisites
-
-Java 25
+Java 17+ (ou 25 recomendado)
 
 Maven
 
-PostgreSQL
+PostgreSQL instalado e a correr
 
-Clone the Repository
-git clone https://github.com/seuusuario/seu-repositorio.git
-cd seu-repositorio
+✔️ Clonar o Repositório
+git clone https://github.com/SManhica/Sistema-Emprego.git
+cd Sistema-Emprego
 
-Configure the Database
+✔️ Configurar o Banco de Dados
 
-Create a PostgreSQL database and update:
+Criar o banco no PostgreSQL
 
-spring.datasource.url=jdbc:postgresql://localhost:5432/emprego_db
-spring.datasource.username=your_user
-spring.datasource.password=your_password
+Restaurar o backup .sql ou .backup caso exista
+
+Editar o arquivo:
+
+src/main/resources/application.properties
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/nome_banco
+spring.datasource.username=postgres
+spring.datasource.password=SUA_SENHA
 spring.jpa.hibernate.ddl-auto=update
 
-Build the Application
-mvn clean install
 
-Run the Application
+⚠️ Atenção à porta do PostgreSQL
+Se não for 5432, alterar na url.
+
+🚀 Como Rodar o Sistema
+mvn clean install
 mvn spring-boot:run
 
-🚀 Usage
-Access the Application
 
-Open:
+Por padrão estará disponível em:
 
-http://localhost:8080
+👉 http://localhost:8080
 
-Candidate Workflow
+🚀 Uso do Sistema
+👤 Fluxo do Candidato
 
-Register and log in
+Registro
 
-Complete profile
+Login
 
-Find jobs
+Completar perfil
 
-Submit applications
+Procurar vagas
 
-Company Workflow
+Enviar candidatura
 
-Register as company
+Acompanhar status
 
-Publish job vacancies
+🏢 Fluxo da Empresa
 
-View candidates
+Registro como empresa
 
-Manage applications
+Login
 
-Admin Workflow
+Publicar vagas
 
-Access admin dashboard
+Analisar candidatos
 
-Monitor system metrics
+Gerir candidaturas
 
-Export reports
+Acessar estatísticas
 
-View logs
+🛡️ Fluxo do Administrador
 
-👨‍💻 How to Use
-Real Use Cases
+Acessar dashboard
 
-Job portals
+Monitorar métricas
 
-Internship management systems
+Consultar logs
 
-HR recruitment tools
+Exportar relatórios
 
-School & university career portals
+Gerenciar usuários
 
-Basic Steps
+👨‍💻 Como Funciona
 
-Sign Up (Candidate/Company/Admin)
+O sistema foi desenvolvido para simular um portal de emprego real, com separação clara de responsabilidades:
 
-Login using Spring Security
+Candidato: busca oportunidades
 
-Dashboard Redirect
+Empresa: publica oportunidades
 
-CRUD management
+Admin: supervisiona toda a operação
 
-Export reports, view logs
+Utilidades práticas:
 
-🗂️ Project Structure
+Portais de emprego
+
+Sistemas de estágio
+
+Plataformas de recrutamento
+
+Career Centers de universidades
+
+🗂️ Estrutura do Projeto
 sistema-emprego/
 │
 ├── src/main/java/com/seu_grupo/sistemaemprego/
-│   ├── controller/          # Spring MVC Controllers
+│   ├── controller/          
 │   ├── model/
-│   │   ├── entity/          # Entities: Usuario, Empresa, Candidato, Vaga, Candidatura, Admin
-│   │   ├── repository/      # JPA Repositories
-│   │   └── service/         # Business Logic
-│   ├── config/              # SecurityConfig, MailConfig, etc.
+│   │   ├── entity/          
+│   │   ├── repository/      
+│   │   └── service/         
+│   ├── config/              
 │   └── SistemaEmpregoApplication.java
 │
 ├── src/main/resources/
-│   ├── templates/           # Thymeleaf templates
+│   ├── templates/           
 │   │   ├── admin/
 │   │   ├── empresa/
 │   │   └── candidato/
@@ -215,99 +232,60 @@ sistema-emprego/
 │   │   └── js/
 │   └── application.properties
 │
-├── pom.xml                  # Maven config
+├── pom.xml
 └── README.md
 
-🔑 Authentication and Security
+🔑 Autenticação e Segurança
 
-SecurityConfig includes:
+Configurações incluídas:
 
-PasswordEncoder
+PasswordEncoder para hashear senhas
 
-Login and logout configuration
+Autorização baseada em papéis:
 
-Role-based access (ADMIN, EMPRESA, CANDIDATO)
+ROLE_ADMIN
 
-Session management
+ROLE_EMPRESA
 
-CSRF options
+ROLE_CANDIDATO
 
-🤝 Contributing
+Sessões controladas
 
-Fork the repository
+Login / Logout
 
-Create a feature branch
+CSRF configurável
 
-Commit changes
+Rotas protegidas
 
-Push and submit a pull request
+🤝 Contribuição
 
-📄 License
+Fork
 
-MIT License (or the one you choose)
+Criar feature branch
 
-🔗 Important Links
+Commit
 
-Seu GitHub: https://github.com/RosarioCaravela
+Push
 
-📝 Footer
+Abrir Pull Request
 
-Repository Name: sistema-emprego
-Author: Rosário Caravela
-If you find this project helpful:
+📄 Licença
 
-⭐ Give it a star
+Licença sugerida: MIT
+(O Open Source mais comum e permissivo)
 
-🍴 Fork it
+🔗 Links Importantes
 
-🐞 Report issues
+GitHub Rosário:
+https://github.com/RosarioCaravela
 
-## Requisitos
+📝 Rodapé
 
-* Java 17+
-* Maven
-* PostgreSQL instalado e a correr
+Sistema de Gestão de Emprego – Engenharia Informática (2025)
+Autor: Rosário Caravela
 
----
-
-## Clonar o Projeto
-
-```sh
-git clone https://github.com/SManhica/Sistema-Emprego.git
-cd Sistema-Emprego
-```
-
----
-
-## Configuração do Banco
-
-1. Criar a base de dados
-2. Restaurar o backup (arquivo `.sql` ou `.backup`)
-3. Editar o arquivo:
-
-`src/main/resources/application.properties`
-
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/nome_banco
-spring.datasource.username=postgres
-spring.datasource.password=SUA_SENHA
-```
-
-> ⚠️ A porta do banco pode ser diferente:
-> Se não for 5432, alterar na `url`
-
----
-
-## Como Rodar
-
-```sh
-mvn clean install
-mvn spring-boot:run
-```
-
-Por padrão, a app inicia em:
-
-👉 [http://localhost:8080](http://localhost:8081)
-
+⭐ Se gostou do projeto, deixe uma star
+🍴 Contribua com um fork
+🐞 Sinalize problemas na aba Issues
 > ⚠️ Se a porta for alterada no `application.properties`
 > Usar: `http://localhost:PORTA_AQUI`
